@@ -33,6 +33,7 @@ export interface StoryAvatarProps extends InstagramStoryProps {
   nameTextStyle?: TextStyle;
   nameTextProps?: TextProps;
   avatarBorderRadius?: number;
+  style?: ViewStyle;
 }
 
 export interface StoryLoaderProps {
