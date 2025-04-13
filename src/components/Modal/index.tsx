@@ -5,7 +5,7 @@ import { GestureResponderEvent, Modal, Pressable } from 'react-native';
 import Animated, {
   cancelAnimation, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedReaction,
   useAnimatedStyle,
-  useDerivedValue, useSharedValue, withTiming,
+  useDerivedValue, useSharedValue, withTiming, Easing,
 } from 'react-native-reanimated';
 import {
   HEIGHT, LONG_PRESS_DURATION, STORY_ANIMATION_DURATION, WIDTH,
@@ -19,7 +19,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
   stories, seenStories, duration, videoDuration, storyAvatarSize, textStyle, containerStyle,
   backgroundColor, videoProps, closeIconColor, modalAnimationDuration = STORY_ANIMATION_DURATION,
   storyAnimationDuration = STORY_ANIMATION_DURATION, hideElementsOnLongPress, loopingStories = 'none',
-  statusBarTranslucent, onLoad, onShow, onHide,
+  statusBarTranslucent, progressBarEasing = 'ease', onLoad, onShow, onHide,
   onSeenStoriesChange, onSwipeUp, onStoryStart, onStoryEnd, footerComponent, ...props
 }, ref ) => {
 
@@ -114,7 +114,8 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
 
     }
 
-    animation.value = withTiming( 1, { duration: newDuration } );
+    const easingConfig = progressBarEasing === 'linear' ? Easing.linear : undefined;
+    animation.value = withTiming(1, { duration: newDuration, easing: easingConfig });
 
   };
 

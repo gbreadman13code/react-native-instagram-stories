@@ -64,6 +64,7 @@ export interface StoryModalProps {
   hideOverlayViewOnLongPress?: boolean;
   loopingStories?: 'none' | 'all' | 'onlyLast';
   statusBarTranslucent?: boolean;
+  progressBarEasing?: 'linear' | 'ease';
   onLoad: () => void;
   onShow?: ( id: string ) => void;
   onHide?: ( id: string ) => void;

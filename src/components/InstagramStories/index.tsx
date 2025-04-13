@@ -34,6 +34,7 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
   isVisible = false,
   hideAvatarList = false,
   avatarBorderRadius,
+  progressBarEasing = 'ease',
   ...props
 }, ref ) => {
 
@@ -256,6 +257,7 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
         videoDuration={videoAnimationMaxDuration}
         videoProps={videoProps}
         closeIconColor={closeIconColor}
+        progressBarEasing={progressBarEasing}
         {...props}
       />
     </>

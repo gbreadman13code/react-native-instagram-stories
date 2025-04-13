@@ -113,6 +113,7 @@ export default YourComponent;
  `closeIconColor`           | string                                       | '#00000099'                                | The color of story close icon.
  `progressColor`            | string                                       | '#00000099'                                | Background color of progress bar item in inactive state
  `progressActiveColor`      | string                                       | '#FFFFFF'                                  | Background color of progress bar item in active state
+ `progressBarEasing`        | 'linear' \| 'ease'                           | 'ease'                                     | Type of animation for the progress bar. Use 'linear' for a constant pace or 'ease' for the default ease animation
  `modalAnimationDuration`   | number                                       | 800                                        | Duration of modal animation in ms (showing/closing instagram stories)
  `storyAnimationDuration`   | number                                       | 800                                        | Duration of story animation (animation when swiping to the left/right)
  `mediaContainerStyle`      | ViewStyle                                    |                                            | Additional styles for media (video or image) container
