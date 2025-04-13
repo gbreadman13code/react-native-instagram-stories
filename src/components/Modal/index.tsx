@@ -20,7 +20,13 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
   backgroundColor, videoProps, closeIconColor, modalAnimationDuration = STORY_ANIMATION_DURATION,
   storyAnimationDuration = STORY_ANIMATION_DURATION, hideElementsOnLongPress, loopingStories = 'none',
   statusBarTranslucent, onLoad, onShow, onHide,
-  onSeenStoriesChange, onSwipeUp, onStoryStart, onStoryEnd, footerComponent, ...props
+  onSeenStoriesChange, onSwipeUp, onStoryStart, onStoryEnd, footerComponent,
+  animationType,
+  animationPerspectiveValue,
+  animationAngleMultiplier,
+  animationScaleEffect,
+  animationZTranslation,
+  ...props
 }, ref ) => {
 
   const [ visible, setVisible ] = useState( false );
@@ -499,6 +505,11 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
                   closeColor={closeIconColor}
                   hideElements={hideElements}
                   videoDuration={videoDuration}
+                  animationType={animationType}
+                  animationPerspectiveValue={animationPerspectiveValue}
+                  animationAngleMultiplier={animationAngleMultiplier}
+                  animationScaleEffect={animationScaleEffect}
+                  animationZTranslation={animationZTranslation}
                   key={story.id}
                   {...props}
                 />

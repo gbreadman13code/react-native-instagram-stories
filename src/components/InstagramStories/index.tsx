@@ -34,6 +34,11 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
   isVisible = false,
   hideAvatarList = false,
   avatarBorderRadius,
+  animationType = 'page-flip',
+  animationPerspectiveValue,
+  animationAngleMultiplier,
+  animationScaleEffect,
+  animationZTranslation,
   ...props
 }, ref ) => {
 
@@ -256,6 +261,11 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
         videoDuration={videoAnimationMaxDuration}
         videoProps={videoProps}
         closeIconColor={closeIconColor}
+        animationType={animationType}
+        animationPerspectiveValue={animationPerspectiveValue}
+        animationAngleMultiplier={animationAngleMultiplier}
+        animationScaleEffect={animationScaleEffect}
+        animationZTranslation={animationZTranslation}
         {...props}
       />
     </>

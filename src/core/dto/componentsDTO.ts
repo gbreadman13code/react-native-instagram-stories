@@ -64,6 +64,11 @@ export interface StoryModalProps {
   hideOverlayViewOnLongPress?: boolean;
   loopingStories?: 'none' | 'all' | 'onlyLast';
   statusBarTranslucent?: boolean;
+  animationType?: 'cube' | 'page-flip';
+  animationPerspectiveValue?: number;
+  animationAngleMultiplier?: number;
+  animationScaleEffect?: number;
+  animationZTranslation?: number;
   onLoad: () => void;
   onShow?: ( id: string ) => void;
   onHide?: ( id: string ) => void;
@@ -98,6 +103,11 @@ export interface AnimationProps {
   children: React.ReactNode;
   x: SharedValue<number>;
   index: number;
+  animationType?: 'cube' | 'page-flip';
+  perspectiveValue?: number;
+  angleMultiplier?: number;
+  scaleEffect?: number;
+  zTranslation?: number;
 }
 
 export interface StoryImageProps {
@@ -173,6 +183,11 @@ export interface StoryListProps extends InstagramStoryProps, StoryHeaderProps {
   hideElements: SharedValue<boolean>;
   hideOverlayViewOnLongPress?: boolean;
   videoDuration?: number;
+  animationType?: 'cube' | 'page-flip';
+  animationPerspectiveValue?: number;
+  animationAngleMultiplier?: number;
+  animationScaleEffect?: number;
+  animationZTranslation?: number;
   onLoad: ( duration?: number ) => void;
 }
 

@@ -16,7 +16,13 @@ const StoryList: FC<StoryListProps> = ( {
   id, stories, index, x, activeUser, activeStory, progress, seenStories, paused,
   onLoad, videoProps, progressColor, progressActiveColor, mediaContainerStyle, imageStyles,
   imageProps, progressContainerStyle, imageOverlayView, hideElements, hideOverlayViewOnLongPress,
-  videoDuration, ...props
+  videoDuration,
+  animationType,
+  animationPerspectiveValue,
+  animationAngleMultiplier,
+  animationScaleEffect,
+  animationZTranslation,
+  ...props
 } ) => {
 
   const imageHeight = useSharedValue( HEIGHT );
@@ -42,7 +48,15 @@ const StoryList: FC<StoryListProps> = ( {
   );
 
   return (
-    <StoryAnimation x={x} index={index}>
+    <StoryAnimation 
+      x={x} 
+      index={index}
+      animationType={animationType}
+      perspectiveValue={animationPerspectiveValue}
+      angleMultiplier={animationAngleMultiplier}
+      scaleEffect={animationScaleEffect}
+      zTranslation={animationZTranslation}
+    >
       <Animated.View style={[ animatedStyles, ListStyles.container ]}>
         <StoryImage
           stories={stories}

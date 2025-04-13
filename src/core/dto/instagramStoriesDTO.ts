@@ -63,6 +63,11 @@ export interface InstagramStoriesProps {
   statusBarTranslucent?: boolean;
   footerComponent?: ReactNode;
   avatarBorderRadius?: number;
+  animationType?: 'cube' | 'page-flip';
+  animationPerspectiveValue?: number;
+  animationAngleMultiplier?: number;
+  animationScaleEffect?: number;
+  animationZTranslation?: number;
   onShow?: ( id: string ) => void;
   onHide?: ( id: string ) => void;
   onSwipeUp?: ( userId?: string, storyId?: string ) => void;

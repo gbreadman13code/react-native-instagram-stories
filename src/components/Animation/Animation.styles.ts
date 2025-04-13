@@ -7,7 +7,8 @@ export default StyleSheet.create( {
     top: 0,
     left: 0,
   },
-  cube: {
+  pageAnimation: {
     justifyContent: 'center',
+    overflow: 'hidden',
   },
 } );
