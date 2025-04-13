@@ -98,11 +98,12 @@ const StoryAnimation: FC<AnimationProps> = ({
       Extrapolation.CLAMP,
     );
     
-    // Вычисляем дополнительное смещение по оси Z для создания эффекта приближения/отдаления краев
-    const translateZ = interpolate(
+    // ВАЖНО: В React Native трансформация translateZ работает по-другому
+    // Используем масштабирование для симуляции эффекта глубины
+    const zEffect = interpolate(
       Math.abs(position),
       [0, WIDTH],
-      [0, zTranslation],
+      [1, 0.9],
       Extrapolation.CLAMP,
     );
     
@@ -113,7 +114,9 @@ const StoryAnimation: FC<AnimationProps> = ({
         { translateX },
         { scale },
         { rotateY },
-        { translateZ },
+        // Заменяем translateZ на дополнительное масштабирование для создания эффекта глубины
+        { scaleX: zEffect },
+        { scaleY: zEffect },
       ],
     };
   });

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { GestureResponderEvent, Modal, Pressable } from 'react-native';
 import Animated, {
-  cancelAnimation, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedReaction,
+  cancelAnimation, Easing, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedReaction,
   useAnimatedStyle,
   useDerivedValue, useSharedValue, withTiming,
 } from 'react-native-reanimated';
@@ -120,7 +120,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
 
     }
 
-    animation.value = withTiming( 1, { duration: newDuration } );
+    animation.value = withTiming( 1, { duration: newDuration, easing: Easing.linear } );
 
   };
 
