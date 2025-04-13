@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 import StoryAvatar from '../Avatar';
 import { StoryAvatarListProps } from '../../core/dto/componentsDTO';
 import { InstagramStoryProps } from '../../core/dto/instagramStoriesDTO';
@@ -7,32 +7,28 @@ import { InstagramStoryProps } from '../../core/dto/instagramStoriesDTO';
 let FlashList: any;
 
 try {
+
   // eslint-disable-next-line global-require
-  FlashList = require('@shopify/flash-list').FlashList;
-} catch (error) {
+  FlashList = require( '@shopify/flash-list' ).FlashList;
+
+} catch ( error ) {
+
   FlashList = null;
+
 }
 
-const styles = StyleSheet.create({
-  avatarContainer: {
-    marginHorizontal: 8,
-  },
-  contentContainer: {
-    paddingHorizontal: 8,
-  }
-});
-
-const StoryAvatarList: FC<StoryAvatarListProps> = ({
+const StoryAvatarList: FC<StoryAvatarListProps> = ( {
   stories, loadingStory, seenStories, colors, seenColors, size,
   showName, nameTextStyle, nameTextProps,
   avatarListContainerProps, avatarListContainerStyle, avatarBorderRadius, onPress,
-}) => {
-  const renderItem = (story: InstagramStoryProps) => (
+} ) => {
+
+  const renderItem = ( story: InstagramStoryProps ) => (
     <StoryAvatar
       {...story}
       loadingStory={loadingStory}
       seenStories={seenStories}
-      onPress={onPress}
+      onPress={() => onPress( story.id )}
       colors={colors}
       seenColors={seenColors}
       size={size}
@@ -41,40 +37,31 @@ const StoryAvatarList: FC<StoryAvatarListProps> = ({
       nameTextProps={nameTextProps}
       avatarBorderRadius={avatarBorderRadius}
       key={`avatar${story.id}`}
-      style={styles.avatarContainer}
     />
   );
 
-  const contentContainerStyle = [
-    styles.contentContainer,
-    avatarListContainerStyle
-  ];
+  if ( FlashList ) {
 
-  if (FlashList) {
     return (
       <FlashList
         horizontal
         {...avatarListContainerProps}
         data={stories}
-        renderItem={({ item }: { item: InstagramStoryProps }) => renderItem(item)}
-        keyExtractor={(item: InstagramStoryProps) => item.id}
-        contentContainerStyle={contentContainerStyle}
+        renderItem={( { item } : { item: InstagramStoryProps } ) => renderItem( item )}
+        keyExtractor={( item: InstagramStoryProps ) => item.id}
+        contentContainerStyle={avatarListContainerStyle}
         testID="storiesList"
       />
     );
+
   }
 
   return (
-    <ScrollView 
-      horizontal 
-      showsHorizontalScrollIndicator={false}
-      {...avatarListContainerProps} 
-      contentContainerStyle={contentContainerStyle} 
-      testID="storiesList"
-    >
-      {stories.map(renderItem)}
+    <ScrollView horizontal {...avatarListContainerProps} contentContainerStyle={avatarListContainerStyle} testID="storiesList">
+      {stories.map( renderItem )}
     </ScrollView>
   );
+
 };
 
-export default memo(StoryAvatarList);
+export default memo( StoryAvatarList );

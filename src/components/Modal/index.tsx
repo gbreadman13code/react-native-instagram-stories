@@ -24,11 +24,9 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
 }, ref ) => {
 
   const [ visible, setVisible ] = useState( false );
-  const [ startPosition, setStartPosition ] = useState({ x: 0, y: 0, scale: 0.5 });
 
   const x = useSharedValue( 0 );
   const y = useSharedValue( HEIGHT );
-  const scale = useSharedValue( 0.5 );
   const animation = useSharedValue( 0 );
   const currentStory = useSharedValue( stories[0]?.stories[0]?.id );
   const paused = useSharedValue( false );
@@ -52,13 +50,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
     ? stories[userIndex.value]?.stories[storyIndex.value + 1]?.id
     : undefined ) );
 
-  const animatedStyles = useAnimatedStyle( () => ({ 
-    top: y.value,
-    transform: [
-      { scale: scale.value },
-    ],
-  }));
-  
+  const animatedStyles = useAnimatedStyle( () => ( { top: y.value } ) );
   const backgroundAnimatedStyles = useAnimatedStyle( () => ( {
     opacity: interpolate( y.value, [ 0, HEIGHT ], [ 1, 0 ] ),
     backgroundColor,
@@ -68,7 +60,6 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
 
     'worklet';
 
-    scale.value = withTiming(0.5, { duration: modalAnimationDuration });
     y.value = withTiming(
       HEIGHT,
       { duration: modalAnimationDuration },
@@ -263,25 +254,11 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
 
   };
 
-  const show = ( id: string, position?: { x: number, y: number, scale?: number } ) => {
-    if (position) {
-      setStartPosition({
-        x: position.x || 0,
-        y: position.y || 0,
-        scale: position.scale || 0.5,
-      });
-      
-      y.value = position.y || 0;
-      scale.value = position.scale || 0.5;
-    } else {
-      // Fallback to default center position
-      setStartPosition({ x: WIDTH / 2 - WIDTH / 4, y: HEIGHT / 2 - HEIGHT / 4, scale: 0.5 });
-      y.value = HEIGHT / 2 - HEIGHT / 4;
-      scale.value = 0.5;
-    }
+  const show = ( id: string ) => {
 
     setVisible( true );
     scrollTo( id, false );
+
   };
 
   const onGestureEvent = useAnimatedGestureHandler( {
@@ -463,10 +440,8 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
 
       }
       onLoad?.();
-      
-      // Анимируем открытие из стартовой позиции к полному экрану
+
       y.value = withTiming( 0, { duration: modalAnimationDuration } );
-      scale.value = withTiming( 1, { duration: modalAnimationDuration } );
 
     } else if ( currentStory.value !== undefined && !firstRender.value ) {
 

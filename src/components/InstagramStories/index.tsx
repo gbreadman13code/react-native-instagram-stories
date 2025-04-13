@@ -45,13 +45,13 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
 
   const modalRef = useRef<StoryModalPublicMethods>( null );
 
-  const onPress = ( payload: { id: string, position?: { x: number, y: number, scale?: number } } ) => {
+  const onPress = ( id: string ) => {
 
-    loadingStory.value = payload.id;
+    loadingStory.value = id;
 
     if ( loadedStories.value ) {
 
-      modalRef.current?.show( payload.id, payload.position );
+      modalRef.current?.show( id );
 
     }
 
@@ -90,7 +90,7 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
 
     if ( loadingStory.value ) {
 
-      onPress( { id: loadingStory.value } );
+      onPress( loadingStory.value );
 
     }
 
@@ -176,15 +176,15 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
       clearProgressStorage,
       goToSpecificStory: ( userId, index ) => modalRef.current?.goToSpecificStory( userId, index ),
       hide: () => modalRef.current?.hide(),
-      show: ( id, position ) => {
+      show: ( id ) => {
 
         if ( id ) {
 
-          onPress( { id, position } );
+          onPress( id );
 
         } else if ( data[0]?.id ) {
 
-          onPress( { id: data[0]?.id, position } );
+          onPress( data[0]?.id );
 
         }
 

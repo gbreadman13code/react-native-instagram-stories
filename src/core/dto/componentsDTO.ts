@@ -19,13 +19,13 @@ export interface StoryAvatarListProps {
   avatarListContainerStyle: InstagramStoriesProps['avatarListContainerStyle'];
   avatarListContainerProps: InstagramStoriesProps['avatarListContainerProps'];
   avatarBorderRadius?: number;
-  onPress: ( payload: { id: string, position?: { x: number, y: number, scale?: number } } ) => void;
+  onPress: ( id: string ) => void;
 }
 
 export interface StoryAvatarProps extends InstagramStoryProps {
   loadingStory: SharedValue<string | undefined>;
   seenStories: SharedValue<ProgressStorageProps>;
-  onPress: ( payload: { id: string, position?: { x: number, y: number, scale?: number } } ) => void;
+  onPress: () => void;
   colors: string[];
   seenColors: string[];
   size: number;
@@ -33,7 +33,6 @@ export interface StoryAvatarProps extends InstagramStoryProps {
   nameTextStyle?: TextStyle;
   nameTextProps?: TextProps;
   avatarBorderRadius?: number;
-  style?: ViewStyle;
 }
 
 export interface StoryLoaderProps {
@@ -75,7 +74,7 @@ export interface StoryModalProps {
 }
 
 export type StoryModalPublicMethods = {
-  show: ( id: string, position?: { x: number, y: number, scale?: number } ) => void;
+  show: ( id: string ) => void;
   hide: () => void;
   pause: () => void;
   resume: () => void;
