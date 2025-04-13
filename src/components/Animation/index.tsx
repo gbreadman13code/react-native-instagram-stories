@@ -74,19 +74,19 @@ const StoryAnimation: FC<AnimationProps> = ({
       Extrapolation.CLAMP
     );
     
-    // Базовое горизонтальное смещение
+    // Базовое горизонтальное смещение - меняем направление
     const translateX = interpolate(
       x.value,
       inputRange,
-      [-WIDTH, 0, WIDTH],
+      [WIDTH, 0, -WIDTH],
       Extrapolation.CLAMP,
     );
     
-    // Эффект поворота, который создает впечатление "перелистывания"
+    // Эффект поворота - меняем направление для правильного перелистывания
     const rotateY = `${interpolate(
       position,
       [-WIDTH, 0, WIDTH],
-      [angleMultiplier, 0, -angleMultiplier],
+      [-angleMultiplier, 0, angleMultiplier],
       Extrapolation.CLAMP,
     )}rad`;
     
