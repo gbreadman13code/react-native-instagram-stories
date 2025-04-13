@@ -28,7 +28,7 @@ const StoryAvatarList: FC<StoryAvatarListProps> = ( {
       {...story}
       loadingStory={loadingStory}
       seenStories={seenStories}
-      onPress={() => onPress( story.id )}
+      onPress={onPress}
       colors={colors}
       seenColors={seenColors}
       size={size}

@@ -34,7 +34,6 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
   isVisible = false,
   hideAvatarList = false,
   avatarBorderRadius,
-  progressBarEasing = 'ease',
   ...props
 }, ref ) => {
 
@@ -46,13 +45,13 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
 
   const modalRef = useRef<StoryModalPublicMethods>( null );
 
-  const onPress = ( id: string ) => {
+  const onPress = ( payload: { id: string, position?: { x: number, y: number, scale?: number } } ) => {
 
-    loadingStory.value = id;
+    loadingStory.value = payload.id;
 
     if ( loadedStories.value ) {
 
-      modalRef.current?.show( id );
+      modalRef.current?.show( payload.id, payload.position );
 
     }
 
@@ -91,7 +90,7 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
 
     if ( loadingStory.value ) {
 
-      onPress( loadingStory.value );
+      onPress( { id: loadingStory.value } );
 
     }
 
@@ -177,15 +176,15 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
       clearProgressStorage,
       goToSpecificStory: ( userId, index ) => modalRef.current?.goToSpecificStory( userId, index ),
       hide: () => modalRef.current?.hide(),
-      show: ( id ) => {
+      show: ( id, position ) => {
 
         if ( id ) {
 
-          onPress( id );
+          onPress( { id, position } );
 
         } else if ( data[0]?.id ) {
 
-          onPress( data[0]?.id );
+          onPress( { id: data[0]?.id, position } );
 
         }
 
@@ -257,7 +256,6 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
         videoDuration={videoAnimationMaxDuration}
         videoProps={videoProps}
         closeIconColor={closeIconColor}
-        progressBarEasing={progressBarEasing}
         {...props}
       />
     </>

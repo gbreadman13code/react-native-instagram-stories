@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useRef } from 'react';
 import {
   View, Image, Text, TouchableOpacity,
 } from 'react-native';
@@ -36,11 +36,29 @@ const StoryAvatar: FC<StoryAvatarProps> = ( {
     () => seenStories.value[id] === stories[stories.length - 1]?.id,
   );
   const loaderColor = useDerivedValue( () => ( seen.value ? seenColors : colors ) );
+  const avatarRef = useRef<View>(null);
 
   const onLoad = () => {
 
     loaded.value = true;
 
+  };
+
+  const handlePress = () => {
+    if (avatarRef.current) {
+      avatarRef.current.measure((x, y, width, height, pageX, pageY) => {
+        onPress({
+          id,
+          position: {
+            x: pageX,
+            y: pageY,
+            scale: size / (width > height ? width : height) * 0.5
+          }
+        });
+      });
+    } else {
+      onPress({ id });
+    }
   };
 
   const imageAnimatedStyles = useAnimatedStyle( () => (
@@ -61,8 +79,8 @@ const StoryAvatar: FC<StoryAvatarProps> = ( {
 
   return (
     <View style={AvatarStyles.name}>
-      <View style={AvatarStyles.container}>
-        <TouchableOpacity activeOpacity={0.6} onPress={onPress} testID={`${id}StoryAvatar${stories.length}Story`}>
+      <View style={AvatarStyles.container} ref={avatarRef}>
+        <TouchableOpacity activeOpacity={0.6} onPress={handlePress} testID={`${id}StoryAvatar${stories.length}Story`}>
           <Loader loading={isLoading} color={loaderColor} size={size + AVATAR_OFFSET * 2} />
           <AnimatedImage
             source={avatarSource}
